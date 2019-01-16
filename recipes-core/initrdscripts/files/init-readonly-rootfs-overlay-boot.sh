@@ -1,4 +1,53 @@
 #!/bin/sh
+################################################################################
+#
+#  Copyright (C) 2016-2018 cmhe
+#
+#  This file is part of the meta-readonly-rootfs-overlay layer
+#  https://github.com/cmhe/meta-readonly-rootfs-overlay
+#
+#  SPDX-License-Identifier: MIT
+#
+################################################################################
+
+#
+# Init process for overlay filesystem
+#
+# An overlay filesystem allows a writable directory tree to be overlaid onto
+# another read-only directory tree. The overlay filesystem is established by
+# this script, which is used as an init process when booting linux. At the end
+# of the script, control is passed on to the normal init process
+# (usually /sbin/init).
+#
+# This script accepts the following kernel parameters:
+#
+#   - init           Standard kernel param: The init process
+#
+#   - root           Standard kernel param: specifies the read-only filesystem
+#                    device
+#
+#   - rootfstype     Standard kernel param: required module name if support
+#                    for the filesystem is not built into the kernel
+#
+#   - rootinit       Use this to avoid looping to inifity if this file is
+#                    located at /sbin/init
+#
+#   - rootoptions    If no read-only device was specified via kernel command
+#                    line, these options will be used to bind-mount the current
+#                    root filesystem
+#
+#   - rootrw         Specifies the read-write file system device (defaults to
+#                    using tmpfs)
+#
+#   - rootrwfstype   Required module name if support for the read-write
+#                    filesystem is not built into the kernel
+#
+#   - rootrwoptions  Specifies the mount options of the read-write filesystem.
+#                    Defaults to 'rw,noatime,mode=755'
+#
+#   - rootrwreset    Set to 'yes' if you want to delete all the files in the RW
+#                    filesystem prior to building the overlay root filesystem
+#
 
 # Enable strict shell mode
 set -euo pipefail
