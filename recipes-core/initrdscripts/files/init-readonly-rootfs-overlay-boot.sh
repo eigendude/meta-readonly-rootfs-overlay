@@ -43,7 +43,7 @@
 #                    filesystem is not built into the kernel
 #
 #   - rootrwoptions  Specifies the mount options of the read-write filesystem.
-#                    Defaults to 'rw,noatime,mode=755'
+#                    Defaults to 'rw,noatime'
 #
 #   - rootrwreset    Set to 'yes' if you want to delete all the files in the RW
 #                    filesystem prior to building the overlay root filesystem
@@ -72,8 +72,8 @@ ROOT_ROMOUNTOPTIONS="bind"
 ROOT_ROMOUNTOPTIONS_DEVICE="noatime,nodiratime"
 
 ROOT_RWFSTYPE=""
-ROOT_RWMOUNTOPTIONS="rw,noatime,mode=755 tmpfs"
-ROOT_RWMOUNTOPTIONS_DEVICE="rw,noatime,mode=755"
+ROOT_RWMOUNTOPTIONS="rw,noatime tmpfs"
+ROOT_RWMOUNTOPTIONS_DEVICE="rw,noatime"
 
 early_setup() {
 	mkdir -p /proc
